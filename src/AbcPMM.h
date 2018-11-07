@@ -2,7 +2,7 @@
  *  AbcPMM.h
  *  SPLITT
  *
- * Copyright 2017 Venelin Mitov
+ * Copyright 2018 Venelin Mitov
  *
  * This file is part of SPLITT: a generic C++ library for Serial and Parallel
  * Lineage Traversal of Trees.
@@ -119,8 +119,6 @@ public:
   }
 
 };
-
-typedef TraversalTask<
-  AbcPMM<OrderedTree<uint, double>> > ParallelPruningAbcPMM;
 }
+
 #endif //AbcPMM_H_
