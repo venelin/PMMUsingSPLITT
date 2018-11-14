@@ -8,7 +8,7 @@ Authors@R: person("Venelin", "Mitov", email = "vmitov@gmail.com",
 Maintainer: Venelin Mitov <vmitov@gmail.com>
 Description: This is an example R-package using the SPLITT library to calculate 
     the likelihood of a phylogenetic mixed model (PMM).
-License: LGPL (>= 2)
+License: GPL (>= 3.0)
 LazyData: true
 Encoding: UTF-8
 Depends:
@@ -18,8 +18,8 @@ Depends:
 LinkingTo: Rcpp
 Imports:
     ape
-RoxygenNote: 6.1.0
+Suggests: 
+    testthat
+RoxygenNote: 6.1.1
 ByteCompile: yes
 NeedsCompilation: yes
-Suggests: 
-    covr
