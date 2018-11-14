@@ -1,0 +1,69 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+[![Travis build status](https://travis-ci.org/venelin/PMMUsingSPLITT.svg?branch=master)](https://travis-ci.org/venelin/PMMUsingSPLITT)
+[![Coverage status](https://codecov.io/gh/venelin/PMMUsingSPLITT/branch/master/graph/badge.svg)](https://codecov.io/github/venelin/PMMUsingSPLITT?branch=master)
+
+# PMMUsingSPLITT
+
+The goal of PMMUsingSPLITT is to provide a minimal example of how to use the SPLITT
+C++ library in an R-package. See [this guide](https://venelin.github.io/SPLITT/articles/SPLITTRcppModules.html) for a tutorial.
+
+## Installation
+
+You can install the released version of PMMUsingSPLITT from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("PMMUsingSPLITT")
+```
+
+## Examples
+
+* Calculating the likelihood of the PMM for a given tree, data and model parameters.
+```{r}
+library(ape)
+library(PMMUsingSPLITT)
+
+set.seed(10)
+
+N <- 1000
+x0 <- 0.1
+alpha <- 1
+theta <- 10
+sigma2 <- 0.25
+sigmae2 <- 1
+
+tree <- rtree(N)
+
+g <- rTraitCont(tree, model = "OU", root.value = x0,
+                alpha = alpha, sigma = sqrt(sigma2),
+                ancestor = FALSE)
+
+x <- g + rnorm(n = N, mean = 0, sd = sqrt(sigmae2))
+
+cat("logLikelihood using R:", PMMLogLik(x, tree, x0, sigma2, sigmae2), "\n")
+cat("logLikelihood using R:", PMMLogLikCpp(x, tree, x0, sigma2, sigmae2), "\n")
+```
+
+* Performing a benchmark to measure the likelihood calculation times using different parallelization strategies:
+
+```{r}
+# N specifies the size of the phylogenetic tree. 
+# Ntests specifies the number of executions in one time measurement 
+# (the more the better, but also slower).
+MiniBenchmark(N = 100, Ntests = 100)
+MiniBenchmark(N = 1000, Ntests = 10)
+MiniBenchmark(N = 10000, Ntests = 10)
+```

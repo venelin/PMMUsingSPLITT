@@ -1,12 +1,13 @@
 Package: PMMUsingSPLITT
 Type: Package
-Title: An example R-package using the SPLITT library 
-Version: 1.0
-Date: 2018-11-07
-Author: Venelin Mitov
+Title: An example R-package using the SPLITT library to calculate the PMM likelihood
+Version: 1.0.1
+Date: 2018-11-14
+Authors@R: person("Venelin", "Mitov", email = "vmitov@gmail.com",
+                 role = c("aut", "cre", "cph"))
 Maintainer: Venelin Mitov <vmitov@gmail.com>
-Description: One paragraph description of what the package does as
-       one or more full sentences.
+Description: This is an example R-package using the SPLITT library to calculate 
+    the likelihood of a phylogenetic mixed model (PMM).
 License: LGPL (>= 2)
 LazyData: true
 Encoding: UTF-8
@@ -20,5 +21,5 @@ Imports:
 RoxygenNote: 6.1.0
 ByteCompile: yes
 NeedsCompilation: yes
-
-
+Suggests: 
+    covr
