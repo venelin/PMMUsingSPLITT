@@ -59,10 +59,12 @@ MiniBenchmark <- function(N = 10000, Ntests = 10) {
   if(R.version[['os']]=='linux-gnu') {
     # this only works on linux
     cpuInfo <- system("cat /proc/cpuinfo | grep 'model name' | uniq", intern = TRUE)
-  } else {
+  } else if(Sys.info()["release"] == "Darwin") {
     # this only works on mac OS x
     cpuInfo <- system("sysctl -a -n machdep.cpu.brand_string", intern = TRUE)
-  } 
+  } else {
+    cpuInfo <- "(I don't know how to figure it out on your OS, sorry.)"
+  }
   
   cat("CPU: ", cpuInfo, "\n")
   
