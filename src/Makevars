@@ -1,23 +1,10 @@
 # Makevars
-# SPLITT
+# POUMM
 # 
 # Copyright 2018 Venelin Mitov
 # 
-# This file is part of SPLITT: a generic C++ library for Serial and Parallel
-# Lineage Traversal of Trees.
-# 
-# SPLITT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as
-# published by the Free Software Foundation, either version 3 of
-# the License, or (at your option) any later version.
-# 
-# SPLITT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-# 
 # You should have received a copy of the GNU Lesser General Public
-# License along with SPLITT.  If not, see
+# License along with POUMM.  If not, see
 # <http://www.gnu.org/licenses/>.
 # 
 # @author Venelin Mitov
@@ -71,5 +58,8 @@
 # shared libraries. Yet, for these options to have an effect, the compiler itself
 # should support OpenMP, i.e. it should include the appropriate OpenMP headers,
 # and the openmp shared library binaries in its distribution (see above comments).
-PKG_CXXFLAGS=$(SHLIB_OPENMP_CXXFLAGS)
+PKG_CXXFLAGS=$(SHLIB_OPENMP_CXXFLAGS) 
+#PKG_CFLAGS=$(SHLIB_OPENMP_CFLAGS)
 PKG_LIBS=$(SHLIB_OPENMP_CXXFLAGS)
+
+CXX_STD = CXX11
