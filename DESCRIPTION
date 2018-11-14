@@ -23,3 +23,6 @@ Suggests:
 RoxygenNote: 6.1.1
 ByteCompile: yes
 NeedsCompilation: yes
+URL: https://github.com/venelin/PMMUsingSPLITT, https://venelin.github.io/SPLITT/index.html
+BugReports: https://github.com/venelin/PMMUsingSPLITT/issues
+
