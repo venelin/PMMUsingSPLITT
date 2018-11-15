@@ -1,3 +1,8 @@
+## Fixes following feedback from CRAN-support
+
+* Title capitalization
+* text in description.
+
 ## Test environments
 * local OS X install, R 3.5.1 : NOTE
 * ubuntu 14.04 (on travis-ci), R 3.5.1 OK, (environments release and devel): status available at: [https://travis-ci.org/venelin/PMMUsingSPLITT/builds/455100287](https://travis-ci.org/venelin/PMMUsingSPLITT/builds/455100287)
