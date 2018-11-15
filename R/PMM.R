@@ -28,7 +28,7 @@
 #' @param tree a phylo object
 #' @param x0,sigma2,sigmae2 parameters of the PMM:
 #' \describe{
-#' \item{x0}{value at the root of tree excluding whte noise;}
+#' \item{x0}{value at the root of tree excluding white noise;}
 #' \item{sigma2}{unit-time variance increment of the heritable component;}
 #' \item{sigmae2}{variance of the non-heritable component.}
 #' }
@@ -88,7 +88,7 @@ PMMLogLik <- function(
 #' Calculate the PMM log-likelihood for a given tree, data and model parameters using the Rcpp module
 #' @inheritParams PMMLogLik
 #' @param cppObject a previously created object returned by \code{\link{NewPMMCppObject}}
-#' @param mode an integer denoting the mode for traversing the tree, i.e. serial vs paralle.
+#' @param mode an integer denoting the mode for traversing the tree, i.e. serial vs parallel.
 #' 
 #' @return the log-likelihood value.
 PMMLogLikCpp <- function(x, tree, x0, sigma2, sigmae2, 

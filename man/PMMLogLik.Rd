@@ -14,7 +14,7 @@ PMMLogLik(x, tree, x0, sigma2, sigmae2, ord = reorder(tree, order =
 
 \item{x0, sigma2, sigmae2}{parameters of the PMM:
 \describe{
-\item{x0}{value at the root of tree excluding whte noise;}
+\item{x0}{value at the root of tree excluding white noise;}
 \item{sigma2}{unit-time variance increment of the heritable component;}
 \item{sigmae2}{variance of the non-heritable component.}
 }}

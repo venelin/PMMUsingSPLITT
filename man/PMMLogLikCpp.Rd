@@ -14,28 +14,28 @@ PMMLogLikCpp(x, tree, x0, sigma2, sigmae2, cppObject = NewPMMCppObject(x,
 
 \item{x0}{parameters of the PMM:
 \describe{
-\item{x0}{value at the root of tree excluding whte noise;}
+\item{x0}{value at the root of tree excluding white noise;}
 \item{sigma2}{unit-time variance increment of the heritable component;}
 \item{sigmae2}{variance of the non-heritable component.}
 }}
 
 \item{sigma2}{parameters of the PMM:
 \describe{
-\item{x0}{value at the root of tree excluding whte noise;}
+\item{x0}{value at the root of tree excluding white noise;}
 \item{sigma2}{unit-time variance increment of the heritable component;}
 \item{sigmae2}{variance of the non-heritable component.}
 }}
 
 \item{sigmae2}{parameters of the PMM:
 \describe{
-\item{x0}{value at the root of tree excluding whte noise;}
+\item{x0}{value at the root of tree excluding white noise;}
 \item{sigma2}{unit-time variance increment of the heritable component;}
 \item{sigmae2}{variance of the non-heritable component.}
 }}
 
 \item{cppObject}{a previously created object returned by \code{\link{NewPMMCppObject}}}
 
-\item{mode}{an integer denoting the mode for traversing the tree, i.e. serial vs paralle.}
+\item{mode}{an integer denoting the mode for traversing the tree, i.e. serial vs parallel.}
 }
 \value{
 the log-likelihood value.
