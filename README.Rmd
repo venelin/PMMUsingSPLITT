@@ -15,6 +15,9 @@ knitr::opts_chunk$set(
 
 [![Travis build status](https://travis-ci.org/venelin/PMMUsingSPLITT.svg?branch=master)](https://travis-ci.org/venelin/PMMUsingSPLITT)
 [![Coverage status](https://codecov.io/gh/venelin/PMMUsingSPLITT/branch/master/graph/badge.svg)](https://codecov.io/github/venelin/PMMUsingSPLITT?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/PMMUsingSPLITT?color=blue)](http://cran.r-project.org/web/packages/PMMUsingSPLITT)
+[![Downloads](http://cranlogs.r-pkg.org/badges/PMMUsingSPLITT?color=blue)](http://cran.rstudio.com/package=PMMUsingSPLITT)
+
 
 # PMMUsingSPLITT
 
