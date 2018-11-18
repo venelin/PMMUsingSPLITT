@@ -64,19 +64,19 @@ MiniBenchmark(N = 100, Ntests = 100)
 #> Number of threads: 8 
 #> Measuring calculation times...
 #>    model                                            mode time.ms
-#> 1    PMM                                      R (serial)    1.90
+#> 1    PMM                                      R (serial)    2.00
 #> 2    PMM                                      C++ (AUTO)    0.03
-#> 3    PMM              C++ (SINGLE_THREAD_LOOP_POSTORDER)    0.03
+#> 3    PMM              C++ (SINGLE_THREAD_LOOP_POSTORDER)    0.01
 #> 4    PMM                 C++ (SINGLE_THREAD_LOOP_PRUNES)    0.02
 #> 5    PMM                 C++ (SINGLE_THREAD_LOOP_VISITS)    0.02
 #> 6    PMM                  C++ (MULTI_THREAD_LOOP_PRUNES)    0.05
-#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)    0.05
-#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)    0.26
+#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)    0.08
+#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)    0.10
 #> 9    PMM                  C++ (MULTI_THREAD_VISIT_QUEUE)    1.69
-#> 10   PMM     C++ (MULTI_THREAD_LOOP_PRUNES_NO_EXCEPTION)    0.38
-#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)    0.42
-#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)    0.37
-#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)    0.26
+#> 10   PMM     C++ (MULTI_THREAD_LOOP_PRUNES_NO_EXCEPTION)    0.25
+#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)    0.14
+#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)    0.24
+#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)    0.38
 MiniBenchmark(N = 1000, Ntests = 10)
 #> Performing a mini-benchmark of the PMM log-likelihood calculation with 
 #>       a tree of size N= 1000 ;
@@ -86,19 +86,19 @@ MiniBenchmark(N = 1000, Ntests = 10)
 #> Number of threads: 8 
 #> Measuring calculation times...
 #>    model                                            mode time.ms
-#> 1    PMM                                      R (serial)    18.0
-#> 2    PMM                                      C++ (AUTO)     0.0
+#> 1    PMM                                      R (serial)    20.0
+#> 2    PMM                                      C++ (AUTO)     0.1
 #> 3    PMM              C++ (SINGLE_THREAD_LOOP_POSTORDER)     0.1
 #> 4    PMM                 C++ (SINGLE_THREAD_LOOP_PRUNES)     0.1
 #> 5    PMM                 C++ (SINGLE_THREAD_LOOP_VISITS)     0.1
-#> 6    PMM                  C++ (MULTI_THREAD_LOOP_PRUNES)     0.4
-#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)     0.5
-#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)     1.9
+#> 6    PMM                  C++ (MULTI_THREAD_LOOP_PRUNES)     0.2
+#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)     0.1
+#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)     0.2
 #> 9    PMM                  C++ (MULTI_THREAD_VISIT_QUEUE)    16.3
 #> 10   PMM     C++ (MULTI_THREAD_LOOP_PRUNES_NO_EXCEPTION)     0.6
-#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)     0.1
-#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)     0.1
-#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)     0.2
+#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)     0.6
+#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)     0.6
+#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)     0.9
 MiniBenchmark(N = 10000, Ntests = 10)
 #> Performing a mini-benchmark of the PMM log-likelihood calculation with 
 #>       a tree of size N= 10000 ;
@@ -108,17 +108,17 @@ MiniBenchmark(N = 10000, Ntests = 10)
 #> Number of threads: 8 
 #> Measuring calculation times...
 #>    model                                            mode time.ms
-#> 1    PMM                                      R (serial)   183.0
-#> 2    PMM                                      C++ (AUTO)     0.8
+#> 1    PMM                                      R (serial)   180.0
+#> 2    PMM                                      C++ (AUTO)     0.4
 #> 3    PMM              C++ (SINGLE_THREAD_LOOP_POSTORDER)     1.1
 #> 4    PMM                 C++ (SINGLE_THREAD_LOOP_PRUNES)     1.1
 #> 5    PMM                 C++ (SINGLE_THREAD_LOOP_VISITS)     1.2
-#> 6    PMM                  C++ (MULTI_THREAD_LOOP_PRUNES)     0.4
-#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)     0.9
-#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)     0.8
-#> 9    PMM                  C++ (MULTI_THREAD_VISIT_QUEUE)   156.1
-#> 10   PMM     C++ (MULTI_THREAD_LOOP_PRUNES_NO_EXCEPTION)     0.3
-#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)     0.4
-#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)     0.5
-#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)     1.0
+#> 6    PMM                  C++ (MULTI_THREAD_LOOP_PRUNES)     0.3
+#> 7    PMM                  C++ (MULTI_THREAD_LOOP_VISITS)     0.3
+#> 8    PMM C++ (MULTI_THREAD_LOOP_VISITS_THEN_LOOP_PRUNES)     0.7
+#> 9    PMM                  C++ (MULTI_THREAD_VISIT_QUEUE)   154.0
+#> 10   PMM     C++ (MULTI_THREAD_LOOP_PRUNES_NO_EXCEPTION)     0.2
+#> 11   PMM                        C++ (HYBRID_LOOP_PRUNES)     0.3
+#> 12   PMM                        C++ (HYBRID_LOOP_VISITS)     0.2
+#> 13   PMM       C++ (HYBRID_LOOP_VISITS_THEN_LOOP_PRUNES)     0.3
 ```
