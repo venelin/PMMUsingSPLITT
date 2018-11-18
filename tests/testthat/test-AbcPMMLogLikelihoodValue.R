@@ -1,5 +1,5 @@
 library(testthat)
-context("Test R and Cpp code calculate the same PMM log-likelihood")
+context("Test R and Cpp code calculate the same AbcPMM log-likelihood")
 
 library(ape)
 library(PMMUsingSPLITT)
@@ -22,7 +22,7 @@ g <- rTraitCont(tree, model = "OU", root.value = x0,
 x <- g + rnorm(n = N, mean = 0, sd = sqrt(sigmae2))
 
 test_that(
-  "PMMLogLik == PMMLogLikCpp",
-  expect_equal(PMMLogLik(x, tree, x0, sigma2, sigmae2),
-               PMMLogLikCpp(x, tree, x0, sigma2, sigmae2))
+  "AbcPMMLogLik == AbcPMMLogLikCpp",
+  expect_equal(AbcPMMLogLik(x, tree, x0, sigma2, sigmae2),
+               AbcPMMLogLikCpp(x, tree, x0, sigma2, sigmae2))
 )

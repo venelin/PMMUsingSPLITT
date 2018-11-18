@@ -1,4 +1,4 @@
-# PMM.R
+# AbcPMM.R
 # PMMUsingSPLITT
 # 
 # Copyright 2018 Venelin Mitov
@@ -37,7 +37,7 @@
 #' which is also set as a default value. Can be passed as argument to speed-up 
 #' the calculation.
 #' @return the log-likelihood value.
-PMMLogLik <- function(
+AbcPMMLogLik <- function(
   x, tree, x0, sigma2, sigmae2, 
   ord = reorder(tree, order = "postorder", index.only = TRUE)) {
   
@@ -85,14 +85,14 @@ PMMLogLik <- function(
   a[N+1]*x0^2 + b[N+1]*x0 + c[N+1]
 }
 
-#' Calculate the PMM log-likelihood for a given tree, data and model parameters using the Rcpp module
-#' @inheritParams PMMLogLik
-#' @param cppObject a previously created object returned by \code{\link{NewPMMCppObject}}
+#' Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module
+#' @inheritParams AbcPMMLogLik
+#' @param cppObject a previously created object returned by \code{\link{NewAbcPMMCppObject}}
 #' @param mode an integer denoting the mode for traversing the tree, i.e. serial vs parallel.
 #' 
 #' @return the log-likelihood value.
-PMMLogLikCpp <- function(x, tree, x0, sigma2, sigmae2, 
-                         cppObject = NewPMMCppObject(x, tree),
+AbcPMMLogLikCpp <- function(x, tree, x0, sigma2, sigmae2, 
+                         cppObject = NewAbcPMMCppObject(x, tree),
                          mode = getOption("SPLITT.postorder.mode", 0)) {
   abc <- cppObject$TraverseTree(c(sigma2, sigmae2), mode)
   abc[1]*x0^2 + abc[2]*x0 + abc[3]
@@ -101,9 +101,9 @@ PMMLogLikCpp <- function(x, tree, x0, sigma2, sigmae2,
 
 #' Create an instance of the Rcpp module for a given tree and trait data
 #'
-#' @inheritParams PMMLogLik
-#' @return an object to be passed as argument of the \link{PMMLogLikCpp} function.
-#' @seealso \link{PMMLogLikCpp}
-NewPMMCppObject <- function(x, tree) {
+#' @inheritParams AbcPMMLogLik
+#' @return an object to be passed as argument of the \link{AbcPMMLogLikCpp} function.
+#' @seealso \link{AbcPMMLogLikCpp}
+NewAbcPMMCppObject <- function(x, tree) {
   PMMUsingSPLITT__TraversalTaskAbcPMM$new(tree, x[1:length(tree$tip.label)])
 }

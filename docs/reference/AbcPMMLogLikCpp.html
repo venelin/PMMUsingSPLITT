@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • PMMUsingSPLITT</title>
+<title>Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module — AbcPMMLogLikCpp • PMMUsingSPLITT</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
@@ -32,7 +32,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module — AbcPMMLogLikCpp" />
+
+<meta property="og:description" content="Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -48,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -98,78 +101,82 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module</h1>
+    <small class="dont-index">Source: <a href='https://github.com/venelin/PMMUsingSPLITT/blob/master/R/AbcPMM.R'><code>R/AbcPMM.R</code></a></small>
+    <div class="hidden name"><code>AbcPMMLogLikCpp.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="AbcPMMLogLik.html">AbcPMMLogLik()</a></code> </p>
-        </td>
-        <td><p>Calculate the PMM log-likelihood for a given tree, data and model parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="AbcPMMLogLikCpp.html">AbcPMMLogLikCpp()</a></code> </p>
-        </td>
-        <td><p>Calculate the AbcPMM log-likelihood for a given tree, data and model parameters using the Rcpp module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="MiniBenchmark.html">MiniBenchmark()</a></code> </p>
-        </td>
-        <td><p>Perform a quick test of the PMM example likelihood calculation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="NewAbcPMMCppObject.html">NewAbcPMMCppObject()</a></code> </p>
-        </td>
-        <td><p>Create an instance of the Rcpp module for a given tree and trait data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="PMMUsingSPLITT__AbcPMM__AlgorithmType.html">PMMUsingSPLITT__AbcPMM__AlgorithmType</a></code> </p>
-        </td>
-        <td><p><code>TraversalAlgorithm</code>-type used in <code>AbcPMM</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="PMMUsingSPLITT__AbcPMM__TraversalAlgorithm.html">PMMUsingSPLITT__AbcPMM__TraversalAlgorithm</a></code> </p>
-        </td>
-        <td><p>Base class for <code>PMMUsingSPLITT::AbcPMM::AlgorithmType</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="PMMUsingSPLITT__TraversalTaskAbcPMM.html">PMMUsingSPLITT__TraversalTaskAbcPMM</a></code> </p>
-        </td>
-        <td><p>Rcpp module for the <code>TraversalTaskAbcPMM</code>-class</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>AbcPMMLogLikCpp</span>(<span class='no'>x</span>, <span class='no'>tree</span>, <span class='no'>x0</span>, <span class='no'>sigma2</span>, <span class='no'>sigmae2</span>,
+  <span class='kw'>cppObject</span> <span class='kw'>=</span> <span class='fu'><a href='NewAbcPMMCppObject.html'>NewAbcPMMCppObject</a></span>(<span class='no'>x</span>, <span class='no'>tree</span>),
+  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"SPLITT.postorder.mode"</span>, <span class='fl'>0</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>a numerical vector of size N, where N is the number of tips in tree</p></td>
+    </tr>
+    <tr>
+      <th>tree</th>
+      <td><p>a phylo object</p></td>
+    </tr>
+    <tr>
+      <th>x0</th>
+      <td><p>parameters of the PMM:</p><dl class='dl-horizontal'>
+<dt>x0</dt><dd><p>value at the root of tree excluding white noise;</p></dd>
+<dt>sigma2</dt><dd><p>unit-time variance increment of the heritable component;</p></dd>
+<dt>sigmae2</dt><dd><p>variance of the non-heritable component.</p></dd>
+</dl></td>
+    </tr>
+    <tr>
+      <th>sigma2</th>
+      <td><p>parameters of the PMM:</p><dl class='dl-horizontal'>
+<dt>x0</dt><dd><p>value at the root of tree excluding white noise;</p></dd>
+<dt>sigma2</dt><dd><p>unit-time variance increment of the heritable component;</p></dd>
+<dt>sigmae2</dt><dd><p>variance of the non-heritable component.</p></dd>
+</dl></td>
+    </tr>
+    <tr>
+      <th>sigmae2</th>
+      <td><p>parameters of the PMM:</p><dl class='dl-horizontal'>
+<dt>x0</dt><dd><p>value at the root of tree excluding white noise;</p></dd>
+<dt>sigma2</dt><dd><p>unit-time variance increment of the heritable component;</p></dd>
+<dt>sigmae2</dt><dd><p>variance of the non-heritable component.</p></dd>
+</dl></td>
+    </tr>
+    <tr>
+      <th>cppObject</th>
+      <td><p>a previously created object returned by <code><a href='NewAbcPMMCppObject.html'>NewAbcPMMCppObject</a></code></p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>an integer denoting the mode for traversing the tree, i.e. serial vs parallel.</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>the log-likelihood value.</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 

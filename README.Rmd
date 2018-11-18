@@ -55,8 +55,8 @@ g <- rTraitCont(tree, model = "OU", root.value = x0,
 
 x <- g + rnorm(n = N, mean = 0, sd = sqrt(sigmae2))
 
-cat("logLikelihood using R:", PMMLogLik(x, tree, x0, sigma2, sigmae2), "\n")
-cat("logLikelihood using R:", PMMLogLikCpp(x, tree, x0, sigma2, sigmae2), "\n")
+cat("logLikelihood using R:", AbcPMMLogLik(x, tree, x0, sigma2, sigmae2), "\n")
+cat("logLikelihood using R:", AbcPMMLogLikCpp(x, tree, x0, sigma2, sigmae2), "\n")
 ```
 
 * Performing a benchmark to measure the likelihood calculation times using different parallelization strategies:
