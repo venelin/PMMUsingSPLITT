@@ -62,4 +62,5 @@ PKG_CXXFLAGS=$(SHLIB_OPENMP_CXXFLAGS)
 #PKG_CFLAGS=$(SHLIB_OPENMP_CFLAGS)
 PKG_LIBS=$(SHLIB_OPENMP_CXXFLAGS)
 
+# this seems to disable overwriting the default C++ compiler in the global Makevars file.
 CXX_STD = CXX11

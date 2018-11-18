@@ -22,13 +22,22 @@
 # 
 # @author Venelin Mitov
 
-## Up until R 2.15.0, the require("methods") is needed but (now)
-## triggers an warning from R CMD check
-#.onLoad <- function(libname, pkgname){
-#    #require("methods")  ## needed with R <= 2.15.0
-#    loadRcppModules()
-#}
+
+#' Rcpp module for the \code{TraversalTaskAbcPMM}-class
+#' @name PMMUsingSPLITT__TraversalTaskAbcPMM
+#' @aliases Rcpp_PMMUsingSPLITT__TraversalTaskAbcPMM-class
+NULL
+
+#' \code{TraversalAlgorithm}-type used in \code{AbcPMM}
+#' @name PMMUsingSPLITT__AbcPMM__AlgorithmType
+#' @aliases Rcpp_PMMUsingSPLITT__AbcPMM__AlgorithmType-class
+NULL
+
+#' Base class for \code{PMMUsingSPLITT::AbcPMM::AlgorithmType}
+#' @name PMMUsingSPLITT__AbcPMM__TraversalAlgorithm
+#' @aliases Rcpp_PMMUsingSPLITT__AbcPMM__TraversalAlgorithm-class 
+#' @slot algorithm algorithm.
+NULL
 
 # loading the RCPP C++ modules
-
 loadModule( "PMMUsingSPLITT__TraversalTaskAbcPMM", TRUE )
