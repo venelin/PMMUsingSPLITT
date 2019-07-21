@@ -35,7 +35,6 @@ using namespace PMMUsingSPLITT;
 
 typedef TraversalTask< AbcPMM<OrderedTree<uint, double>> > TraversalTaskAbcPMM;
 
-
 TraversalTaskAbcPMM* CreateTraversalTaskAbcPMM(
     Rcpp::List const& tree, vec const& values) {
   
