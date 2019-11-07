@@ -2,7 +2,7 @@
  *  SPLITT.h
  *  SPLITT
  *
- * Copyright 2017-2019 Venelin Mitov
+ * Copyright 2017 Venelin Mitov
  *
  * This file is part of SPLITT: a generic C++ library for Serial and Parallel
  * Lineage Traversal of Trees.
@@ -70,11 +70,11 @@
 
 //' @name SPLITT
 //' @title SPLITT: A generic C++ library for Serial and Parallel Lineage Traversal of Trees
-//' @details This documentation of the SPLITT API is still under construction. 
-//' Not all classes and methods have yet been described. 
 //' 
-//' @description SPLITT defines a set of basic types, classes, global 
-//' functions and constants:
+//' @description All basic types, functions and classes defined in SPLITT.
+//' 
+//' %\if{html}{\figure{UmlDiagram8.pdf}{options: width=100\%}}
+//' %\if{latex}{\figure{UmlDiagram8.pdf}{options: width=15cm}}
 //' 
 //' @section Basic types:
 //' \describe{
@@ -717,9 +717,10 @@ public:
 //'   specialization does exist. This is the application-specific node-type. 
 //'   The branches in the tree are defined as couples of nodes 
 //'   <branch_start_node, branch_end_node>.
-//' @details During the construction of \code{\link[=SPLITT::Tree]{Tree}} object, 
-//' the nodes are assigned \code{unsigned int} ids from 0 to M-1 (M being the 
-//' number of nodes in the tree). 
+//' @details
+//'   During the construction of \code{\link[=SPLITT::Tree]{Tree}} object, the 
+//'   nodes are assigned \code{unsigned int} ids from 0 to M-1 (M being the 
+//'   number of nodes in the tree). 
 //'   
 //' @seealso \code{\link[=SPLITT::Tree]{Tree}}
 //' @seealso \link{SPLITT} 
@@ -1352,10 +1353,10 @@ public:
 //'   specialization does exist. This is the application-specific node-type. 
 //'   The branches in the tree are defined as couples of nodes 
 //'   <branch_start_node, branch_end_node>.
-//' @details During the construction of 
-//' \code{\link[=SPLITT::OrderedTree]{OrderedTree}} object, the nodes are 
-//' assigned \code{unsigned int} ids from 0 to M-1 (M being the number of nodes 
-//' in the tree). 
+//' @details
+//'   During the construction of \code{\link[=SPLITT::OrderedTree]{OrderedTree}} object, the 
+//'   nodes are assigned \code{unsigned int} ids from 0 to M-1 (M being the 
+//'   number of nodes in the tree). 
 //'   
 //' @seealso \code{\link[=SPLITT::OrderedTree]{OrderedTree}}
 //' @seealso \link{SPLITT} 
@@ -2012,20 +2013,29 @@ protected:
   void TraverseTreeSingleThreadLoopPostorder() {
     _PRAGMA_OMP_SIMD
     for(uint i = 0; i < ParentType::ref_tree_.num_nodes(); i++) {
-      ParentType::ref_spec_.InitNode(i);
+      exception_handler_.Run([=]{
+        ParentType::ref_spec_.InitNode(i);
+      });
     }
+    exception_handler_.Rethrow();
 
     for(uint i = 0; i < ParentType::ref_tree_.num_nodes() - 1; i++) {
-      ParentType::ref_spec_.VisitNode(i);
-      ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
+      exception_handler_.Run([=]{
+        ParentType::ref_spec_.VisitNode(i);
+        ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
+      });
     }
+    exception_handler_.Rethrow();
   }
 
   void TraverseTreeSingleThreadLoopPrunes() {
     _PRAGMA_OMP_SIMD
     for(uint i = 0; i < ParentType::ref_tree_.num_nodes(); i++) {
-      ParentType::ref_spec_.InitNode(i);
+      exception_handler_.Run([=]{
+        ParentType::ref_spec_.InitNode(i);
+      });
     }
+    exception_handler_.Rethrow();
 
     for(uint i_prune = 0;
         i_prune < ParentType::ref_tree_.num_parallel_ranges_prune();
@@ -2034,33 +2044,42 @@ protected:
 
     _PRAGMA_OMP_SIMD
       for(uint i = range_prune[0]; i <= range_prune[1]; i++) {
-        ParentType::ref_spec_.VisitNode(i);
-        ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
+        exception_handler_.Run([=]{
+          ParentType::ref_spec_.VisitNode(i);
+          ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
+        });
       }
+      exception_handler_.Rethrow();
     }
   }
 
   void TraverseTreeSingleThreadLoopVisits() {
     _PRAGMA_OMP_SIMD
     for(uint i = 0; i < ParentType::ref_tree_.num_nodes(); i++) {
-      ParentType::ref_spec_.InitNode(i);
+      exception_handler_.Run([=]{
+        ParentType::ref_spec_.InitNode(i);
+      });
     }
+    exception_handler_.Rethrow();
 
     for(uint i_level = 0; i_level < ParentType::ref_tree_.num_levels(); i_level++) {
       auto range_visit = ParentType::ref_tree_.RangeIdVisitNode(i_level);
       _PRAGMA_OMP_SIMD
       for(uint i = range_visit[0]; i <= range_visit[1]; i++) {
-        if(i < ParentType::ref_tree_.num_tips()) {
-          // i is a tip (only Visit)
-          ParentType::ref_spec_.VisitNode(i);
-        } else {
-          // i is internal
-          for(uint j: ParentType::ref_tree_.FindChildren(i)) {
-            ParentType::ref_spec_.PruneNode(j, i);
+        exception_handler_.Run([=]{
+          if(i < ParentType::ref_tree_.num_tips()) {
+            // i is a tip (only Visit)
+            ParentType::ref_spec_.VisitNode(i);
+          } else {
+            // i is internal
+            for(uint j: ParentType::ref_tree_.FindChildren(i)) {
+              ParentType::ref_spec_.PruneNode(j, i);
+            }
+            ParentType::ref_spec_.VisitNode(i);
           }
-          ParentType::ref_spec_.VisitNode(i);
-        }
+        });
       }
+      exception_handler_.Rethrow();
     }
 
     // VisitNode not called on the root node
@@ -2079,6 +2098,7 @@ protected:
       ParentType::ref_spec_.InitNode(i);  
     });
   }
+  exception_handler_.Rethrow();
 
   uint i_prune = 0;
   for(uint i_level = 0; i_level < ParentType::ref_tree_.num_levels(); i_level++) {
@@ -2092,6 +2112,7 @@ protected:
           ParentType::ref_spec_.VisitNode(i);
         });
       }
+      exception_handler_.Rethrow();
 
       uint num_branches_done = 0;
 
@@ -2105,6 +2126,7 @@ protected:
             ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
           });
         }
+        exception_handler_.Rethrow();
 
         num_branches_done +=  range_prune[1] - range_prune[0] + 1;
       ++i_prune;
@@ -2129,6 +2151,7 @@ protected:
         ParentType::ref_spec_.InitNode(i);
       });
     }
+    exception_handler_.Rethrow();
 
     for(uint i_level = 0; i_level < ParentType::ref_tree_.num_levels(); i_level++) {
       auto range_visit = ParentType::ref_tree_.RangeIdVisitNode(i_level);
@@ -2147,6 +2170,7 @@ protected:
           }
         });
       }
+      exception_handler_.Rethrow();
     }
 }
     // VisitNode not called on the root node
@@ -2192,6 +2216,7 @@ protected:
     }
   });
 }
+exception_handler_.Rethrow();
 }
 
   void TraverseTreeMultiThreadLoopPrunes() {
@@ -2204,6 +2229,7 @@ protected:
       ParentType::ref_spec_.InitNode(i);
     });
   }
+  exception_handler_.Rethrow();
 
   for(uint i_prune = 0; i_prune < ParentType::ref_tree_.num_parallel_ranges_prune(); i_prune++) {
     auto range_prune = ParentType::ref_tree_.RangeIdPruneNode(i_prune);
@@ -2215,6 +2241,7 @@ protected:
           ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
         });
       }
+      exception_handler_.Rethrow();
   }
 }
   }
@@ -2257,6 +2284,7 @@ protected:
         ParentType::ref_spec_.InitNode(i);
       });
     }
+    exception_handler_.Rethrow();
 
     uint i_prune = 0;
   for(uint i_level = 0; i_level < ParentType::ref_tree_.num_levels(); i_level++) {
@@ -2270,6 +2298,7 @@ protected:
             ParentType::ref_spec_.VisitNode(i);
           });
         }
+        exception_handler_.Rethrow();
     } else if(tid == 0) {
       // only the master thread executes this
       _PRAGMA_OMP_SIMD
@@ -2278,6 +2307,7 @@ protected:
           ParentType::ref_spec_.VisitNode(i);
         });
       }
+      exception_handler_.Rethrow();
     }
 
     if (tid == 0) {
@@ -2291,6 +2321,7 @@ protected:
               ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
             });
           }
+          exception_handler_.Rethrow();
 
           num_branches_done +=  range_prune[1] - range_prune[0] + 1;
         ++i_prune;
@@ -2317,6 +2348,7 @@ protected:
         ParentType::ref_spec_.InitNode(i);
       });
     }
+    exception_handler_.Rethrow();
 
 
   for(uint i_prune = 0; i_prune < ParentType::ref_tree_.num_parallel_ranges_prune(); i_prune++) {
@@ -2331,6 +2363,7 @@ protected:
             ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
           });
         }
+        exception_handler_.Rethrow();
       } else if (tid == 0) {
         // only one (master) thread executes this
         _PRAGMA_OMP_SIMD
@@ -2340,6 +2373,7 @@ protected:
             ParentType::ref_spec_.PruneNode(i, ParentType::ref_tree_.FindIdOfParent(i));
           });
         }
+        exception_handler_.Rethrow();
       }
     }
 }
@@ -2362,6 +2396,7 @@ protected:
         ParentType::ref_spec_.InitNode(i);
       });
     }
+    exception_handler_.Rethrow();
 
   for(uint i_level = 0; i_level < ParentType::ref_tree_.num_levels(); i_level++) {
     auto range_visit = ParentType::ref_tree_.RangeIdVisitNode(i_level);
@@ -2383,6 +2418,7 @@ protected:
           }
         });
       }
+      exception_handler_.Rethrow();
     } else if(tid == 0) {
       // only the master thread executes this
       _PRAGMA_OMP_SIMD
@@ -2400,6 +2436,7 @@ protected:
           }
         });
       }
+      exception_handler_.Rethrow();
     }
   }
 }
@@ -2409,6 +2446,7 @@ protected:
         ParentType::ref_spec_.PruneNode(j, ParentType::ref_tree_.num_nodes() - 1);
       });
     }
+    exception_handler_.Rethrow();
   }
 };
 
